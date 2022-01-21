@@ -14,6 +14,7 @@ const Pokedex = (props) => {
         type1 = data.types[0].type.name;
         type2 = "N/A";
       }
+
       return (
         <div className='container-pokedex'>
           <div className='left-screen'>
@@ -60,14 +61,26 @@ const Pokedex = (props) => {
                 <button
                   className='nextPokemonBtn'
                   value='next'
-                  onClick={() => props.setPokemon(data.id + 1)}
+                  onClick={() => {
+                    if (data.id === 898) {
+                      props.setPokemon(data.id = 1)
+                    } else {
+                      props.setPokemon(data.id + 1)
+                    }
+                  }}
                 ></button>
                 <div className='arrow-down'></div>
                 <div className='arrow-left'></div>
                 <button
                   className='previousPokemonBtn'
                   value='previous'
-                  onClick={() => props.setPokemon(data.id - 1)}
+                  onClick={() => {
+                    if (data.id === 1) {
+                      props.setPokemon(data.id = 898)
+                    } else {
+                      props.setPokemon(data.id - 1)
+                    }
+                  }}
                 ></button>
                 <div className='arrow-mid'>
                   <div className='circle-shadow'></div>

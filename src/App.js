@@ -7,7 +7,6 @@ import { Input } from "semantic-ui-react";
 const App = () => {
   const [pokemon, setPokemon] = useState("bulbasaur");
   const [pokemonData, setPokemonData] = useState([]);
-  // const [pokemonType, setPokemonType] = useState("");
 
   const getPokemon = useCallback(async () => {
     const toArray = [];
@@ -17,7 +16,6 @@ const App = () => {
       const res = await axios.get(url);
 
       toArray.push(res.data);
-      // setPokemonType(res.data.types[0].type.name);
       setPokemonData(toArray);
 
       console.log(res);
@@ -48,8 +46,8 @@ const App = () => {
       <form onSubmit={handleSubmit}>
         <div className='inputDiv'>
           <Input
+            icon='search'
             type='text'
-            className='inputName'
             onChange={handleChange}
             placeholder='Enter Pokémon name'
           />

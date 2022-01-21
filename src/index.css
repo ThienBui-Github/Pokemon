@@ -33,12 +33,6 @@ body {
   justify-content: center;
 }
 
-.inputName {
-  width: 200px;
-  height: 40px;
-  font-size: 18px;
-}
-
 .container-pokedex {
   width: 800px;
   height: 600px;
