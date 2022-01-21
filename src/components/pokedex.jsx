@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Pokedex = (props) => {
   const pokemonData = props.data;
   var type1 = "";
   var type2 = "";
+
+  const [toggleView, setToggleView] = useState(true);
+
+  const changeView = () => {
+    setToggleView(!toggleView);
+  }
 
   if (pokemonData !== null) {
     return pokemonData.map((data) => {
@@ -31,8 +37,7 @@ const Pokedex = (props) => {
                 <div className='main-screen-top-lights'></div>
                 <div id='display' className='main-screen-display'>
                   <div className='pokemon-img'>
-                    <img src={data.sprites["front_default"]} alt='' />
-                    <img src={data.sprites["back_default"]} alt='' />
+                    {toggleView ? <img src={data.sprites["front_default"]} alt='' /> : <img src={data.sprites["back_default"]} alt='' />}
                   </div>
                 </div>
                 <div className='main-screen-speaker-light'></div>
@@ -169,7 +174,11 @@ const Pokedex = (props) => {
             <div className='screenName'>{data.name}</div>
             <div className='screenType'></div>
 
-            <div className='yellow yellowBtn'></div>
+            <button
+              className='changeView'
+              value='viewImg'
+              onClick={changeView}
+            ></button>
           </div>
         </div>
       );

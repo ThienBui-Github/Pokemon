@@ -255,8 +255,8 @@ body {
 }
 
 .container-pokedex .left-screen-bottom .main-screen-display .pokemon-img img {
-  width: 135px;
-  height: 135px;
+  width: 200px;
+  height: 200px;
 }
 
 .container-pokedex .left-screen-bottom .main-screen-speaker-light {
@@ -314,20 +314,6 @@ body {
   box-shadow: 6px 0 0 0 #111;
 }
 
-/* .arrow-right {
-  width: 45px;
-  height: 40px;
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  border-left: none;
-  border-top: none;
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
-  border-right: 6px solid #111;
-  box-shadow: 0 7px 0 0 #111;
-} */
-
 .nextPokemonBtn {
   background: #333333;
   width: 34px;
@@ -359,17 +345,6 @@ body {
   border-bottom: 6px solid #111;
   box-shadow: 6px 0 0 0 #111;
 }
-
-/* .arrow-left {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  top: 40px;
-  left: -40px;
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
-  box-shadow: 0 7px 0 0px #111;
-} */
 
 .previousPokemonBtn {
   background: #333333;
@@ -658,7 +633,7 @@ body {
   left: 255px;
 }
 
-.yellowBtn {
+.changeView {
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -667,24 +642,8 @@ body {
   background: #ffe600;
   left: 255px;
   border: 1px solid black;
-}
-
-.yellow::before {
-  content: "";
-  position: absolute;
-}
-
-.yellow::after {
-  content: "";
-  position: absolute;
-}
-
-.yellowBtn::before {
-  background-color: #ffe600;
-}
-
-.yellowBtn::after {
-  background-color: #ffe600;
+  box-shadow: 4px 4px 5px 0px #333333;
+  cursor: pointer;
 }
 
 .screenName,
