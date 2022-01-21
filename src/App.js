@@ -1,6 +1,6 @@
 import "./index.css";
 import axios from "axios";
-import React, { Component, useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Pokedex from "./components/pokedex";
 import { Input } from "semantic-ui-react";
 
