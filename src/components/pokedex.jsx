@@ -20,7 +20,7 @@ const Pokedex = (props) => {
 
       toArray.push(res.data);
       setPokemonData(toArray);
-
+      console.log("{Pokedex}");
       console.log(res);
     } catch (e) {
       console.log(e);
