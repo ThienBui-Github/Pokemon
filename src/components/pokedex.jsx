@@ -5,7 +5,7 @@ const Pokedex = (props) => {
   var type1 = "";
   var type2 = "";
 
-  if (pokemonData != null) {
+  if (pokemonData !== null) {
     return pokemonData.map((data) => {
       if (data.types.length > 1) {
         type1 = data.types[0].type.name;
