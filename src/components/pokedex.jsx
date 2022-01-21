@@ -5,6 +5,11 @@ import { Input } from "semantic-ui-react";
 const Pokedex = (props) => {
   const [pokemon, setPokemon] = useState("bulbasaur");
   const [pokemonData, setPokemonData] = useState([]);
+  const [toggleView, setToggleView] = useState(true);
+
+  const changeView = () => {
+    setToggleView(!toggleView);
+  };
 
   const getPokemon = useCallback(async () => {
     const toArray = [];
@@ -38,15 +43,8 @@ const Pokedex = (props) => {
       getPokemon();
     }
   }, [getPokemon, pokemon]);
-  // const pokemonData = props.data;
   var type1 = "";
   var type2 = "";
-
-  const [toggleView, setToggleView] = useState(true);
-
-  const changeView = () => {
-    setToggleView(!toggleView);
-  };
 
   if (pokemonData !== null) {
     return pokemonData.map((data) => {
