@@ -5,11 +5,43 @@
   font-family: "Acme", sans-serif;
 }
 
+body {
+  background: linear-gradient(135deg, #3c5aa6, #ffcb05);
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  min-height: 100vh;
+}
+
 .App {
   display: grid;
   align-items: center;
   justify-content: center;
 }
+
+/* HEADER + NavBar */
+
+header {
+  display: grid;
+  justify-content: center;
+}
+
+.center {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.menu {
+  width: 100%;
+}
+
+.ui.menu .item {
+  font-size: 18px;
+}
+
+/* END */
+
+/* POKEDEX CSS */
 
 .container-pokedex .left-screen-bottom,
 .container-pokedex .left-screen-bottom .main-screen-top-lights,
@@ -17,14 +49,6 @@
   display: grid;
   align-items: center;
   justify-content: center;
-}
-
-body {
-  background: linear-gradient(135deg, #3c5aa6, #ffcb05);
-  background-size: contain;
-  background-repeat: no-repeat;
-
-  min-height: 100vh;
 }
 
 .inputDiv {
@@ -278,7 +302,7 @@ body {
   margin-right: 0.5rem;
 }
 
-.container-pokedex .left-screen-bottom .main-screen-speaker > * {
+.container-pokedex .left-screen-bottom .main-screen-speaker>* {
   width: 2.5rem;
   height: 5px;
   margin-top: 3px;
@@ -561,17 +585,11 @@ body {
   overflow: auto;
 }
 
-.container-pokedex
-  .right-screen-bottom
-  .info-container
-  .info-screen::-webkit-scrollbar {
+.container-pokedex .right-screen-bottom .info-container .info-screen::-webkit-scrollbar {
   width: 0.5em;
 }
 
-.container-pokedex
-  .right-screen-bottom
-  .info-container
-  .info-screen::-webkit-scrollbar-thumb {
+.container-pokedex .right-screen-bottom .info-container .info-screen::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.2);
 }
@@ -588,8 +606,8 @@ body {
   justify-content: center;
 }
 
-.container-pokedex .right-screen-bottom .blue-pad-first-row > *,
-.container-pokedex .right-screen-bottom .blue-pad-second-row > * {
+.container-pokedex .right-screen-bottom .blue-pad-first-row>*,
+.container-pokedex .right-screen-bottom .blue-pad-second-row>* {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 5px;
@@ -599,7 +617,7 @@ body {
   border: 1px solid black;
 }
 
-.whiteBtn > * {
+.whiteBtn>* {
   margin-top: 10px;
   width: 3rem;
   height: 3rem;

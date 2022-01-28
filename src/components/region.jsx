@@ -9,6 +9,7 @@ const Region = () => {
     const toArray = [];
     try {
       const url = `https://pokeapi.co/api/v2/pokedex/${region}`;
+      // const url = `https://pokeapi.co/api/v2/region/${region}`;
 
       const res = await axios.get(url);
 
@@ -25,7 +26,7 @@ const Region = () => {
       getRegionPokemon();
     }
   }, [getRegionPokemon, region]);
-  return <div></div>;
+  return (<div>Region Page (À éditer)</div>);
 };
 
 export default Region;
