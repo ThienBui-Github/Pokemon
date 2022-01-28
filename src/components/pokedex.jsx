@@ -45,9 +45,7 @@ const Pokedex = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
-
-  //Rerender and reRoute when pokemon change
-  useEffect(() => {
+  const update = useCallback(async () => {
     let string = "../pokedex/";
     if (updatedPokemon === "" || updatedPokemon === undefined) {
       let result = string.concat("", "bulbasaur");
@@ -57,14 +55,22 @@ const Pokedex = (props) => {
     }
     if (pokemon === "" || pokemon === undefined) {
       setPokemon("bulbasaur");
-    } else if (pokemon > 898) {
-      setPokemon("bulbasaur");
-    } else {
-      let result = string.concat("", pokemon);
-      navigate(result, { replace: true });
-      getPokemon();
+      return;
     }
+    if (pokemon > 898) {
+      setPokemon("bulbasaur");
+      return;
+    }
+
+    let result = string.concat("", pokemon);
+    navigate(result, { replace: true });
+    getPokemon();
   }, [getPokemon, pokemon, updatedPokemon, navigate]);
+
+  //Rerender and reRoute when pokemon change
+  useEffect(() => {
+    update();
+  }, [update]);
   var type1 = "";
   var type2 = "";
 
