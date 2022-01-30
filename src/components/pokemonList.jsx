@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Button, Card, Image } from 'semantic-ui-react';
 
 import axios from "axios";
 
@@ -89,14 +90,36 @@ const PokemonList = (props) => {
     setPokemonTemp(pokemonData);
   };
 
+  var type1 = "";
+  var type2 = "";
+
   //Render all the pokemon of the current page
   const renderPokemon = () => {
     console.log(pokemonTemp);
     return (
-      <div>
+      <div class="ui fluid doubling stackable cards centered">
         {pokemonTemp.map((data) => {
-          return <div>{data[0].name}</div>;
-        })}
+          if (data[0].types.length > 1) {
+            type1 = data[0].types[0].type.name;
+            type2 = data[0].types[1].type.name;
+          } else {
+            type1 = data[0].types[0].type.name;
+            type2 = "";
+          }
+
+          return (
+            <Card>
+              <Image
+                floated=''
+                size=''
+                src={data[0].sprites.front_default} />
+              <Card.Header><div class="description centered title">{data[0].name}</div></Card.Header>
+              <Card.Meta><div class="description centered type">{type1} &nbsp; {type2}</div></Card.Meta>
+
+            </Card>
+          )
+        })
+        }
       </div>
     );
   };
@@ -113,17 +136,18 @@ const PokemonList = (props) => {
   }
   return (
     <div>
-      <div>
-        <button onClick={handlePrevious} disabled={prevDisable}>
+      <br></br>
+      <div className="centered">
+        <Button onClick={handlePrevious} disabled={prevDisable}>
           Previous
-        </button>
-        <button onClick={handleNext} disabled={nextDisable}>
+        </Button>
+        <Button onClick={handleNext} disabled={nextDisable}>
           Next
-        </button>
+        </Button>
       </div>
-
+      <br></br>
       <div>{renderPokemon()}</div>
-    </div>
+    </div >
   );
 };
 
