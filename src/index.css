@@ -6,10 +6,8 @@
 }
 
 body {
-  background: linear-gradient(135deg, #3c5aa6, #ffcb05);
-  background-size: contain;
-  background-repeat: no-repeat;
-
+  /* background: linear-gradient(135deg, #3c5aa6, #ffcb05); */
+  background: #333333;
   min-height: 100vh;
 }
 
@@ -700,4 +698,26 @@ header {
 
 .description {
   text-transform: capitalize;
+}
+
+/* CARD CSS */
+
+.card {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.centered {
+  font-size: 18px;
+  text-align: center;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.type {
+  font-weight: bold;
 }
