@@ -16,22 +16,34 @@ const Pokedex = (props) => {
     setToggleView(!toggleView);
   };
 
+  const navigateTo = useCallback(
+    (name) => {
+      let string = "../pokedex/";
+      let result = string.concat("", name);
+      navigate(result, { replace: true });
+    },
+    [navigate]
+  );
+
   // Call and set pokemonData of current Pokemon
   const getPokemon = useCallback(async () => {
     const toArray = [];
+
     try {
       const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
-
       const res = await axios.get(url);
-
       toArray.push(res.data);
       setPokemonData(toArray);
+
       console.log("{Pokedex}");
       console.log(res);
     } catch (e) {
       console.log(e);
     }
   }, [pokemon]);
+
+  //Throttle number of api Resquest when switching route
+  const delayedGetPokemon = useCallback(debounce(getPokemon, 100), [pokemon]);
 
   //Handling onChange event of Search bar
   const handleChange = (e) => {
@@ -45,11 +57,11 @@ const Pokedex = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  //Update the UI and route
   const update = useCallback(async () => {
-    let string = "../pokedex/";
     if (updatedPokemon === "" || updatedPokemon === undefined) {
-      let result = string.concat("", "bulbasaur");
-      navigate(result, { replace: true });
+      navigateTo("bulbasaur");
 
       return;
     }
@@ -62,15 +74,15 @@ const Pokedex = (props) => {
       return;
     }
 
-    let result = string.concat("", pokemon);
-    navigate(result, { replace: true });
-    getPokemon();
-  }, [getPokemon, pokemon, updatedPokemon, navigate]);
+    navigateTo(pokemon);
+    delayedGetPokemon();
+  }, [delayedGetPokemon, pokemon, updatedPokemon, navigateTo]);
 
   //Rerender and reRoute when pokemon change
   useEffect(() => {
     update();
   }, [update]);
+
   var type1 = "";
   var type2 = "";
 

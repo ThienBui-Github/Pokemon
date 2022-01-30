@@ -1,15 +1,67 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import { debounce } from "lodash";
+import { useParams, useNavigate } from "react-router";
+import PokemonList from "./pokemonList";
 
 const Region = () => {
-  const [region, setRegion] = useState(3);
-  const [regionData, setRegionData] = useState([]);
+  let updatedRegion = useParams().region;
+  let updatedRegionId;
+  console.log("Top level " + updatedRegion);
+  let navigate = useNavigate();
 
-  const getRegionPokemon = useCallback(async () => {
+  const [region, setRegion] = useState(updatedRegion);
+  const [regionData, setRegionData] = useState([]);
+  const [regionPokemon, setRegionPokemon] = useState([]);
+  const [pokemon, setPokemon] = useState("");
+  const [pokemonData, setPokemonData] = useState([]);
+
+  const changeRegionName = async (update) => {
+    //Assigns ID for request
+    console.log("Change " + update);
+    switch (update) {
+      case "Kanto":
+        updatedRegionId = 2;
+        break;
+      case "Johto":
+        updatedRegionId = 3;
+        break;
+      case "Hoenn":
+        updatedRegionId = 4;
+        break;
+      case "Sinnoh":
+        updatedRegionId = 5;
+        break;
+      case "Unova":
+        updatedRegionId = 8;
+        break;
+      case "Kalos":
+        updatedRegionId = 12;
+        break;
+      case "Alola":
+        updatedRegionId = 16;
+        break;
+      case "Ulaula":
+        updatedRegionId = 19;
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const navigateTo = (name) => {
+    let string = "../region/";
+    let result = string.concat("", name);
+    navigate(result, { replace: true });
+  };
+
+  const getRegionPokemon = async () => {
     const toArray = [];
     try {
-      const url = `https://pokeapi.co/api/v2/pokedex/${region}`;
-      // const url = `https://pokeapi.co/api/v2/region/${region}`;
+      console.log("Get " + updatedRegionId);
+      const url = `https://pokeapi.co/api/v2/pokedex/${updatedRegionId}`;
 
       const res = await axios.get(url);
 
@@ -20,13 +72,62 @@ const Region = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [region]);
-  useEffect(() => {
-    if (region !== "") {
-      getRegionPokemon();
+  };
+
+  const delayedGetRegion = debounce(getRegionPokemon, 300);
+
+  const getPokemon = useCallback(
+    async (data) => {
+      const toArray = [];
+
+      try {
+        const url = `https://pokeapi.co/api/v2/pokemon/${data}`;
+        const res = await axios.get(url);
+        toArray.push(res.data);
+        setPokemonData(toArray);
+
+        console.log("{Pokedex}");
+        console.log(res);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    [pokemon]
+  );
+
+  //Update the UI and route
+  const update = async () => {
+    changeRegionName(updatedRegion);
+    if (updatedRegion === "" || updatedRegion === undefined) {
+      navigateTo("Kanto");
+
+      return;
     }
-  }, [getRegionPokemon, region]);
-  return (<div>Region Page (À éditer)</div>);
+    if (region === "" || region === undefined) {
+      navigateTo("Kanto");
+      return;
+    }
+
+    console.log("test");
+    delayedGetRegion();
+  };
+
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    console.log("Effect " + region);
+    update();
+  }, [updatedRegion]);
+
+  if (regionData[0] === undefined) {
+    return (<div></div>);
+  } else {
+    return (
+      <div>
+        <PokemonList RegionData={regionData[0]} />
+      </div>
+    );
+  }
 };
 
 export default Region;

@@ -31,9 +31,12 @@ header {
   padding-top: 10px;
   text-align: center;
 }
-
-.menu {
-  
+.region {
+  display: flex;
+  padding-top: 1rem;
+}
+.region-items {
+  flex: 1;
 }
 
 .ui.menu .item {
@@ -303,7 +306,7 @@ header {
   margin-right: 0.5rem;
 }
 
-.container-pokedex .left-screen-bottom .main-screen-speaker>* {
+.container-pokedex .left-screen-bottom .main-screen-speaker > * {
   width: 2.5rem;
   height: 5px;
   margin-top: 3px;
@@ -586,11 +589,17 @@ header {
   overflow: auto;
 }
 
-.container-pokedex .right-screen-bottom .info-container .info-screen::-webkit-scrollbar {
+.container-pokedex
+  .right-screen-bottom
+  .info-container
+  .info-screen::-webkit-scrollbar {
   width: 0.5em;
 }
 
-.container-pokedex .right-screen-bottom .info-container .info-screen::-webkit-scrollbar-thumb {
+.container-pokedex
+  .right-screen-bottom
+  .info-container
+  .info-screen::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.2);
 }
@@ -607,8 +616,8 @@ header {
   justify-content: center;
 }
 
-.container-pokedex .right-screen-bottom .blue-pad-first-row>*,
-.container-pokedex .right-screen-bottom .blue-pad-second-row>* {
+.container-pokedex .right-screen-bottom .blue-pad-first-row > *,
+.container-pokedex .right-screen-bottom .blue-pad-second-row > * {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 5px;
@@ -618,7 +627,7 @@ header {
   border: 1px solid black;
 }
 
-.whiteBtn>* {
+.whiteBtn > * {
   margin-top: 10px;
   width: 3rem;
   height: 3rem;

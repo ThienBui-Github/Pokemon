@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Pokedex from "./pokedex";
 import Region from "./region";
 
@@ -14,7 +14,7 @@ const AppRoutes = () => {
         element={<Pokedex />}
         exact="true"
       />
-      <Route path="/region/:region" element={<Region />} />
+      <Route path="/region/:region" element={<Region />} exact="true" />
     </Routes>
   );
 };
