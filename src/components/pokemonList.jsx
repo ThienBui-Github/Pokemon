@@ -132,7 +132,7 @@ const PokemonList = (props) => {
               <Image floated="" size="" src={data[0].sprites.front_default} />
               <Card.Header>
                 <div class="description centered title">
-                  {data[0].id}&nbsp;{data[0].name}
+                  #{data[0].id}&nbsp;{data[0].name}
                 </div>
               </Card.Header>
               <Card.Meta>
