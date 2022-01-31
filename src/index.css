@@ -6,7 +6,6 @@
 }
 
 body {
-  /* background: linear-gradient(135deg, #3c5aa6, #ffcb05); */
   background: #333333;
   min-height: 100vh;
 }
@@ -26,13 +25,16 @@ header {
 }
 
 .center {
+  color: whitesmoke;
   padding-top: 10px;
   text-align: center;
 }
+
 .region {
   display: flex;
   padding-top: 1rem;
 }
+
 .region-items {
   flex: 1;
 }
@@ -41,10 +43,16 @@ header {
   font-size: 18px;
 }
 
-/* END */
+/* END HEADER + NavBar */
+
+/* searchBar */
+.inputDiv {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+}
 
 /* POKEDEX CSS */
-
 .container-pokedex .left-screen-bottom,
 .container-pokedex .left-screen-bottom .main-screen-top-lights,
 .container-pokedex .left-screen-top .light-container {
@@ -53,12 +61,7 @@ header {
   justify-content: center;
 }
 
-.inputDiv {
-  margin-top: 5rem;
-  display: flex;
-  justify-content: center;
-}
-
+/* Div container for the Pokedex*/
 .container-pokedex {
   width: 800px;
   height: 600px;
@@ -70,6 +73,7 @@ header {
   margin-bottom: 3rem;
 }
 
+/* Css for left side of Pokedex */
 .container-pokedex .left-screen {
   position: relative;
   background-color: #cd1030;
@@ -116,6 +120,7 @@ header {
   border-radius: 50% 0 50% 0;
 }
 
+/* Lights top left of Pokedex */
 .container-pokedex .left-screen-top .light {
   position: relative;
   height: 1.5rem;
@@ -202,6 +207,7 @@ header {
   margin: 0;
 }
 
+/* Bottom left of Pokedex*/
 .container-pokedex .left-screen-bottom {
   position: relative;
   height: 75%;
@@ -223,6 +229,7 @@ header {
   border-top-left-radius: 20px;
 }
 
+/* Main screen on the left side */
 .container-pokedex .left-screen-bottom .main-screen {
   position: relative;
   top: -15%;
@@ -263,6 +270,7 @@ header {
   margin-right: 1rem;
 }
 
+/* Screen to display the Pokemon image */
 .container-pokedex .left-screen-bottom .main-screen-display {
   grid-column: 1 / span 2;
   width: 100%;
@@ -304,7 +312,7 @@ header {
   margin-right: 0.5rem;
 }
 
-.container-pokedex .left-screen-bottom .main-screen-speaker > * {
+.container-pokedex .left-screen-bottom .main-screen-speaker>* {
   width: 2.5rem;
   height: 5px;
   margin-top: 3px;
@@ -312,6 +320,7 @@ header {
   background-color: #4d4d4d;
 }
 
+/*Arrow Pad with 2 button for next and previous Pokemon */
 .container-pokedex .left-screen-bottom .arrow-pad {
   position: absolute;
   top: 70%;
@@ -325,6 +334,8 @@ header {
 .container-pokedex .left-screen-bottom .arrow-pad .arrow-down,
 .container-pokedex .left-screen-bottom .arrow-pad .arrow-left {
   background: #333333;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .arrow-up {
@@ -390,6 +401,27 @@ header {
   z-index: 99;
 }
 
+.container-pokedex .left-screen-bottom .arrow-pad .arrow-mid {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background: #333333;
+}
+
+.container-pokedex .left-screen-bottom .arrow-pad .arrow-mid .circle-shadow {
+  background: radial-gradient(#111, #222);
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 5.5px;
+  left: 7px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #222, 0 0 0 3px #111;
+}
+
+/* More css for some decorative buttons */
 .redBtn,
 .blueBtn {
   position: absolute;
@@ -422,6 +454,7 @@ header {
   border-radius: 5px;
 }
 
+/* Lines in the green screen on the bottom left of the Pokedex*/
 .middleLine {
   position: relative;
   height: 1px;
@@ -453,26 +486,7 @@ header {
   left: 80%;
 }
 
-.container-pokedex .left-screen-bottom .arrow-pad .arrow-mid {
-  position: absolute;
-  top: 40px;
-  left: 0;
-  width: 30px;
-  height: 30px;
-  background: #333333;
-}
-
-.container-pokedex .left-screen-bottom .arrow-pad .arrow-mid .circle-shadow {
-  background: radial-gradient(#111, #222);
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  top: 5.5px;
-  left: 7px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 3px #222, 0 0 0 3px #111;
-}
-
+/* Joints design in the middle of the Pokedex, joining both sides together */
 .container-pokedex .left-screen-joint {
   position: absolute;
   width: 10%;
@@ -486,11 +500,7 @@ header {
   border-radius: 15px;
 }
 
-.container-pokedex .left-screen-joint::before {
-  content: "";
-  position: absolute;
-}
-
+.container-pokedex .left-screen-joint::before,
 .container-pokedex .left-screen-joint::after {
   content: "";
   position: absolute;
@@ -545,6 +555,7 @@ header {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+/* Css for right side of Pokedex */
 .container-pokedex .right-screen-bottom {
   position: relative;
   width: 89%;
@@ -577,35 +588,20 @@ header {
   text-align: left;
 }
 
+/* Screen to display Pokemon infos */
 .container-pokedex .right-screen-bottom .info-container .info-screen {
   padding: 0.5rem 1rem;
   font-size: medium;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  /* grid-template-rows: 0.5fr 0.5fr 0.5fr 0.5fr; */
-  /* grid-row-gap: 0.5rem; */
   overflow: auto;
-}
-
-.container-pokedex
-  .right-screen-bottom
-  .info-container
-  .info-screen::-webkit-scrollbar {
-  width: 0.5em;
-}
-
-.container-pokedex
-  .right-screen-bottom
-  .info-container
-  .info-screen::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .container-pokedex .right-screen-bottom .info-container .info-screen .label {
   text-transform: uppercase;
 }
 
+/* More decoratives buttons, 2 rows of blue squares */
 .container-pokedex .right-screen-bottom .blue-pad-first-row,
 .container-pokedex .right-screen-bottom .blue-pad-second-row {
   margin: auto;
@@ -614,8 +610,8 @@ header {
   justify-content: center;
 }
 
-.container-pokedex .right-screen-bottom .blue-pad-first-row > *,
-.container-pokedex .right-screen-bottom .blue-pad-second-row > * {
+.container-pokedex .right-screen-bottom .blue-pad-first-row>*,
+.container-pokedex .right-screen-bottom .blue-pad-second-row>* {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 5px;
@@ -625,7 +621,8 @@ header {
   border: 1px solid black;
 }
 
-.whiteBtn > * {
+/* 2 white decoratives buttons */
+.whiteBtn>* {
   margin-top: 10px;
   width: 3rem;
   height: 3rem;
@@ -639,12 +636,13 @@ header {
   margin-left: 35px;
 }
 
+/* 2 black decoratives buttons */
 .blackBtn1,
 .blackBtn2 {
   position: absolute;
   width: 50px;
   height: 10px;
-  top: 275px;
+  top: 245px;
   background: #333333;
   border: 1px solid black;
   border-radius: 5px;
@@ -659,6 +657,7 @@ header {
   left: 255px;
 }
 
+/* Design of button for changing the view of Pokemon image */
 .changeView {
   width: 45px;
   height: 45px;
@@ -672,6 +671,7 @@ header {
   cursor: pointer;
 }
 
+/* Screen to display Pokemon name */
 .screenName,
 .screenType {
   width: 125px;
@@ -700,11 +700,10 @@ header {
   text-transform: capitalize;
 }
 
-/* CARD CSS */
+/* END OF POKEDEX CSS */
 
+/* CARD CSS */
 .card {
-  width: 200px;
-  display: flex;
   justify-content: center;
 }
 
