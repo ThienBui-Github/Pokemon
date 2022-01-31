@@ -9,10 +9,12 @@ const PokemonList = (props) => {
   let regionData = props.RegionData;
   let pokemonData = [];
   let navigate = useNavigate();
-  const increment = 25;
+  const nbPokemon = regionData.pokemon_entries.length;
+  const increment = 24;
 
   const [nextDisable, setNextDisable] = useState(false);
   const [prevDisable, setPrevDisable] = useState(true);
+  const [page, setPage] = useState(1);
   const [indexList, setIndexList] = useState(0);
   const [pokemonTemp, setPokemonTemp] = useState([]);
 
@@ -21,6 +23,11 @@ const PokemonList = (props) => {
     let string = "../pokedex/";
     let result = string.concat("", name);
     navigate(result, { replace: true });
+  };
+
+  const getNbPage = () => {
+    if (pokemonData != null) {
+    }
   };
 
   //Calls api and gets pokemon
@@ -40,7 +47,7 @@ const PokemonList = (props) => {
   //Function for getting all pokemon id in order of current Region
   const pokemonArray = () => {
     let array = [];
-    for (let index = 0; index < regionData.pokemon_entries.length; index++) {
+    for (let index = 0; index < nbPokemon; index++) {
       let element = regionData.pokemon_entries[index];
       let pokemonString = element.pokemon_species.url;
       let length = pokemonString.length;
@@ -48,17 +55,27 @@ const PokemonList = (props) => {
     }
     return array;
   };
+
+  //Handler for page counter
+  const handleChangePage = (e) => {
+    console.log("Before " + page);
+    setPage(e.target.value);
+    console.log("After " + page);
+  };
+
   //Handler for previous button
   const handlePrevious = async (e) => {
     let num = indexList - increment;
     if (num === 0) {
       setPrevDisable(true);
       setNextDisable(false);
+      setPage(1);
       setIndexList(0);
       await loadPokemon(num);
     } else if (num - increment < 0) {
       setPrevDisable(true);
       setNextDisable(false);
+      setPage(1);
       setIndexList(0);
       await loadPokemon(num);
     } else {
@@ -106,33 +123,36 @@ const PokemonList = (props) => {
     setPokemonTemp(pokemonData);
   };
 
-  var type1 = "";
-  var type2 = "";
-
   //Render all the pokemon of the current page
   const renderPokemon = () => {
     console.log(pokemonTemp);
+    var type1 = "";
+    var type2 = "";
     return (
       <div class="ui fluid doubling stackable cards centered">
-        {pokemonTemp.map((data) => {
-          if (data[0].types.length > 1) {
-            type1 = data[0].types[0].type.name;
-            type2 = data[0].types[1].type.name;
+        {pokemonTemp.map((pokemon) => {
+          if (pokemon[0].types.length > 1) {
+            type1 = pokemon[0].types[0].type.name;
+            type2 = pokemon[0].types[1].type.name;
           } else {
-            type1 = data[0].types[0].type.name;
+            type1 = pokemon[0].types[0].type.name;
             type2 = "";
           }
 
           return (
             <Card
               onClick={() => {
-                navigateTo(data[0].name);
+                navigateTo(pokemon[0].name);
               }}
             >
-              <Image floated="" size="" src={data[0].sprites.front_default} />
+              <Image
+                floated=""
+                size=""
+                src={pokemon[0].sprites.front_default}
+              />
               <Card.Header>
                 <div class="description centered title">
-                  #{data[0].id}&nbsp;{data[0].name}
+                  #{pokemon[0].id}&nbsp;{pokemon[0].name}
                 </div>
               </Card.Header>
               <Card.Meta>
@@ -148,6 +168,7 @@ const PokemonList = (props) => {
   };
 
   useEffect(() => {
+    setPage(1);
     setIndexList(0);
     setPrevDisable(true);
     setNextDisable(false);
@@ -164,6 +185,22 @@ const PokemonList = (props) => {
         <Button onClick={handlePrevious} disabled={prevDisable}>
           Previous
         </Button>
+        <div class="ui right labeled input">
+          <input
+            defaultValue={page}
+            placeholder=""
+            maxLength={1}
+            type="text"
+            
+            onChange={handleChangePage}
+            onInput={(e) => {
+              e.target.value = e.target.value
+                .replace(/[^0-9.]/g, "")
+                .replace(/(\..*?)\..*/g, "$1");
+            }}
+          />
+          <div class="ui basic label">/ 4</div>
+        </div>
         <Button onClick={handleNext} disabled={nextDisable}>
           Next
         </Button>

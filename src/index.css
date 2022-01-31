@@ -312,7 +312,7 @@ header {
   margin-right: 0.5rem;
 }
 
-.container-pokedex .left-screen-bottom .main-screen-speaker>* {
+.container-pokedex .left-screen-bottom .main-screen-speaker > * {
   width: 2.5rem;
   height: 5px;
   margin-top: 3px;
@@ -608,8 +608,8 @@ header {
   justify-content: center;
 }
 
-.container-pokedex .right-screen-bottom .blue-pad-first-row>*,
-.container-pokedex .right-screen-bottom .blue-pad-second-row>* {
+.container-pokedex .right-screen-bottom .blue-pad-first-row > *,
+.container-pokedex .right-screen-bottom .blue-pad-second-row > * {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 5px;
@@ -620,7 +620,7 @@ header {
 }
 
 /* 2 white decoratives buttons */
-.whiteBtn>* {
+.whiteBtn > * {
   margin-top: 10px;
   width: 3rem;
   height: 3rem;
@@ -706,8 +706,10 @@ header {
 }
 
 .centered {
+  display: flex;
   font-size: 18px;
   text-align: center;
+  justify-content: center;
 }
 
 .title {
@@ -717,4 +719,16 @@ header {
 
 .type {
   font-weight: bold;
+}
+
+.ui.card,
+.ui.cards > .card {
+  width: 200px;
+}
+.ui.right.labeled.input {
+  padding-left: 1rem;
+  padding-right: 4.7rem;
+  justify-content: ;
+  text-align: center !important;
+  width: 135px;
 }
