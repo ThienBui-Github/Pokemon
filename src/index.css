@@ -725,10 +725,10 @@ header {
 .ui.cards > .card {
   width: 200px;
 }
+
 .ui.right.labeled.input {
   padding-left: 1rem;
   padding-right: 4.7rem;
-  justify-content: ;
   text-align: center !important;
   width: 135px;
 }
