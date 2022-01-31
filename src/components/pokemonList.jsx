@@ -10,7 +10,7 @@ const PokemonList = (props) => {
   let pokemonData = [];
   let navigate = useNavigate();
   const nbPokemon = regionData.pokemon_entries.length;
-  const increment = 24;
+  const increment = 25;
 
   const [nextDisable, setNextDisable] = useState(false);
   const [prevDisable, setPrevDisable] = useState(true);
@@ -79,7 +79,7 @@ const PokemonList = (props) => {
       }
       let loadValue = Number.parseInt(value * increment - increment);
       console.log(value);
-      if (value <= nbPage || value !== 0 || value !== null) {
+      if (value <= nbPage || value !== 0 || !value.isNan()) {
         setPage(value);
         setIndexList(loadValue);
 
@@ -216,7 +216,6 @@ const PokemonList = (props) => {
         <Button onClick={handlePrevious} disabled={prevDisable}>
           Previous
         </Button>
-        <form onSubmit={handleChangePage}>
           <div class="ui right labeled input">
             <input
               defaultValue={page}
@@ -233,7 +232,6 @@ const PokemonList = (props) => {
             />
             <div class="ui basic label">/ {getNbPage()}</div>
           </div>
-        </form>
         <Button onClick={handleNext} disabled={nextDisable}>
           Next
         </Button>
