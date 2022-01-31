@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button, Card, Image } from "semantic-ui-react";
 
 import { useNavigate } from "react-router";
@@ -27,6 +27,11 @@ const PokemonList = (props) => {
 
   const getNbPage = () => {
     if (pokemonData != null) {
+      let modNbPokemon = nbPokemon % increment;
+      if (modNbPokemon > 0) {
+        return Math.trunc(nbPokemon / increment) + 1;
+      }
+      return Math.trunc(nbPokemon / increment);
     }
   };
 
@@ -57,15 +62,37 @@ const PokemonList = (props) => {
   };
 
   //Handler for page counter
-  const handleChangePage = (e) => {
-    console.log("Before " + page);
-    setPage(e.target.value);
-    console.log("After " + page);
+  const handleChangePage = async (e) => {
+    e.preventDefault();
+    let value = e.target.value;
+    let nbPage = getNbPage();
+    if (value !== null) {
+      if (value >= nbPage) {
+        setNextDisable(true);
+        setPrevDisable(false);
+      } else if (value === "1") {
+        setNextDisable(false);
+        setPrevDisable(true);
+      } else if (value >= 1) {
+        setNextDisable(false);
+        setPrevDisable(false);
+      }
+      let loadValue = Number.parseInt(value * increment - increment);
+      console.log(value);
+      if (value <= nbPage || value !== 0 || value !== null) {
+        setPage(value);
+        setIndexList(loadValue);
+
+        await loadPokemon(loadValue);
+      }
+    } else {
+    }
   };
 
   //Handler for previous button
   const handlePrevious = async (e) => {
     let num = indexList - increment;
+    let numPage = Number.parseInt(page) - 1;
     if (num === 0) {
       setPrevDisable(true);
       setNextDisable(false);
@@ -80,6 +107,7 @@ const PokemonList = (props) => {
       await loadPokemon(num);
     } else {
       setNextDisable(false);
+      setPage(numPage);
       setIndexList(num);
 
       await loadPokemon(num);
@@ -88,15 +116,18 @@ const PokemonList = (props) => {
   //Handler for next button
   const handleNext = async (e) => {
     let num = indexList + increment;
-    if (num + increment >= pokemonArray().length) {
+    let numPage = Number.parseInt(page) + 1;
+    if (num + increment >= nbPokemon) {
       console.log("test1 " + num);
       setNextDisable(true);
       setPrevDisable(false);
+      setPage(numPage);
       setIndexList(num);
     } else {
       console.log("test2 " + num);
       setNextDisable(false);
       setPrevDisable(false);
+      setPage(numPage);
       setIndexList(num);
     }
 
@@ -185,22 +216,24 @@ const PokemonList = (props) => {
         <Button onClick={handlePrevious} disabled={prevDisable}>
           Previous
         </Button>
-        <div class="ui right labeled input">
-          <input
-            defaultValue={page}
-            placeholder=""
-            maxLength={1}
-            type="text"
-            
-            onChange={handleChangePage}
-            onInput={(e) => {
-              e.target.value = e.target.value
-                .replace(/[^0-9.]/g, "")
-                .replace(/(\..*?)\..*/g, "$1");
-            }}
-          />
-          <div class="ui basic label">/ 4</div>
-        </div>
+        <form onSubmit={handleChangePage}>
+          <div class="ui right labeled input">
+            <input
+              defaultValue={page}
+              value={page}
+              placeholder=""
+              maxLength={2}
+              type="text"
+              onChange={handleChangePage}
+              onInput={(e) => {
+                e.target.value = e.target.value
+                  .replace(/[^0-9.]/g, "")
+                  .replace(/(\..*?)\..*/g, "$1");
+              }}
+            />
+            <div class="ui basic label">/ {getNbPage()}</div>
+          </div>
+        </form>
         <Button onClick={handleNext} disabled={nextDisable}>
           Next
         </Button>

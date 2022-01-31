@@ -728,7 +728,6 @@ header {
 .ui.right.labeled.input {
   padding-left: 1rem;
   padding-right: 4.7rem;
-  justify-content: ;
   text-align: center !important;
-  width: 135px;
+  width: 140px;
 }

@@ -100,9 +100,9 @@ const Pokedex = (props) => {
 
       return (
         <div>
+          {/* Seach bar */}
           <form onSubmit={handleSubmit}>
             <div className="inputDiv">
-              {/* Seach bar */}
               <Input
                 icon="search"
                 type="text"
