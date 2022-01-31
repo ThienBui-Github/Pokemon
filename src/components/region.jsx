@@ -40,7 +40,7 @@ const Region = () => {
         updatedRegionId = 16;
         break;
       case "Galar":
-        updatedRegionId = 1;
+        updatedRegionId = 27;
         break;
 
       default:
