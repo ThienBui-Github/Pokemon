@@ -1,19 +1,27 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Image } from 'semantic-ui-react';
+import { Button, Card, Image } from "semantic-ui-react";
+
+import { useNavigate } from "react-router";
 
 import axios from "axios";
 
 const PokemonList = (props) => {
   let regionData = props.RegionData;
   let pokemonData = [];
-
-  // let indexList = 0;
-  let increment = 25;
+  let navigate = useNavigate();
+  const increment = 25;
 
   const [nextDisable, setNextDisable] = useState(false);
   const [prevDisable, setPrevDisable] = useState(true);
   const [indexList, setIndexList] = useState(0);
   const [pokemonTemp, setPokemonTemp] = useState([]);
+
+  //Navigation to pokedex on Card Click
+  const navigateTo = (name) => {
+    let string = "../pokedex/";
+    let result = string.concat("", name);
+    navigate(result, { replace: true });
+  };
 
   //Calls api and gets pokemon
   const getPokemon = async (pokemon) => {
@@ -41,37 +49,41 @@ const PokemonList = (props) => {
     return array;
   };
   //Handler for previous button
-  const handlePrevious = (e) => {
-    let num = indexList;
+  const handlePrevious = async (e) => {
+    let num = indexList - increment;
     if (num === 0) {
       setPrevDisable(true);
       setNextDisable(false);
-      loadPokemon(num);
+      setIndexList(0);
+      await loadPokemon(num);
     } else if (num - increment < 0) {
       setPrevDisable(true);
       setNextDisable(false);
       setIndexList(0);
-      loadPokemon(num);
+      await loadPokemon(num);
     } else {
-      setIndexList((num -= increment));
+      setNextDisable(false);
+      setIndexList(num);
 
-      loadPokemon(num);
+      await loadPokemon(num);
     }
   };
   //Handler for next button
-  const handleNext = (e) => {
-    let num = indexList;
-    if (num + increment > pokemonArray().length) {
+  const handleNext = async (e) => {
+    let num = indexList + increment;
+    if (num + increment >= pokemonArray().length) {
+      console.log("test1 " + num);
       setNextDisable(true);
       setPrevDisable(false);
-      loadPokemon(num);
+      setIndexList(num);
     } else {
+      console.log("test2 " + num);
       setNextDisable(false);
       setPrevDisable(false);
-      setIndexList((num += increment));
-
-      loadPokemon(num);
+      setIndexList(num);
     }
+
+    await loadPokemon(num);
   };
 
   //Load all pokemon to Component state
@@ -82,7 +94,11 @@ const PokemonList = (props) => {
         pokemonData[index] = await getPokemon(element[index]);
       }
     } else {
-      for (let index = indexPokemon; index < indexPokemon + 25; index++) {
+      for (
+        let index = indexPokemon;
+        index < indexPokemon + increment;
+        index++
+      ) {
         const element = pokemonArray();
         pokemonData[index] = await getPokemon(element[index]);
       }
@@ -108,18 +124,25 @@ const PokemonList = (props) => {
           }
 
           return (
-            <Card>
-              <Image
-                floated=''
-                size=''
-                src={data[0].sprites.front_default} />
-              <Card.Header><div class="description centered title">{data[0].name}</div></Card.Header>
-              <Card.Meta><div class="description centered type">{type1} &nbsp; {type2}</div></Card.Meta>
-
+            <Card
+              onClick={() => {
+                navigateTo(data[0].name);
+              }}
+            >
+              <Image floated="" size="" src={data[0].sprites.front_default} />
+              <Card.Header>
+                <div class="description centered title">
+                  {data[0].id}&nbsp;{data[0].name}
+                </div>
+              </Card.Header>
+              <Card.Meta>
+                <div class="description centered type">
+                  {type1} &nbsp; {type2}
+                </div>
+              </Card.Meta>
             </Card>
-          )
-        })
-        }
+          );
+        })}
       </div>
     );
   };
@@ -128,7 +151,7 @@ const PokemonList = (props) => {
     setIndexList(0);
     setPrevDisable(true);
     setNextDisable(false);
-    loadPokemon(indexList);
+    loadPokemon(0);
   }, [regionData]);
 
   if (pokemonArray() === null) {
@@ -147,7 +170,7 @@ const PokemonList = (props) => {
       </div>
       <br></br>
       <div>{renderPokemon()}</div>
-    </div >
+    </div>
   );
 };
 

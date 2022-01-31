@@ -17,8 +17,8 @@ const Region = () => {
   const [pokemon, setPokemon] = useState("");
   const [pokemonData, setPokemonData] = useState([]);
 
+  //Assigns ID for request
   const changeRegionName = async (update) => {
-    //Assigns ID for request
     console.log("Change " + update);
     switch (update) {
       case "Kanto":
@@ -42,21 +42,22 @@ const Region = () => {
       case "Alola":
         updatedRegionId = 16;
         break;
-      case "Ulaula":
-        updatedRegionId = 19;
+      case "Galar":
+        updatedRegionId = 1;
         break;
 
       default:
         break;
     }
   };
-
+  //Navigate to correct Region route
   const navigateTo = (name) => {
     let string = "../region/";
     let result = string.concat("", name);
     navigate(result, { replace: true });
   };
 
+  //Fetch region from Api
   const getRegionPokemon = async () => {
     const toArray = [];
     try {
@@ -76,25 +77,6 @@ const Region = () => {
 
   const delayedGetRegion = debounce(getRegionPokemon, 300);
 
-  const getPokemon = useCallback(
-    async (data) => {
-      const toArray = [];
-
-      try {
-        const url = `https://pokeapi.co/api/v2/pokemon/${data}`;
-        const res = await axios.get(url);
-        toArray.push(res.data);
-        setPokemonData(toArray);
-
-        console.log("{Pokedex}");
-        console.log(res);
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    [pokemon]
-  );
-
   //Update the UI and route
   const update = async () => {
     changeRegionName(updatedRegion);
@@ -112,15 +94,13 @@ const Region = () => {
     delayedGetRegion();
   };
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
     console.log("Effect " + region);
     update();
   }, [updatedRegion]);
 
   if (regionData[0] === undefined) {
-    return (<div></div>);
+    return <div></div>;
   } else {
     return (
       <div>

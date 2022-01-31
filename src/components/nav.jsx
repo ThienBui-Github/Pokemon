@@ -31,9 +31,9 @@ const Nav = () => {
         <Menu.Item as={NavLink} to="/region/Alola">
           Alola
         </Menu.Item>
-        <Menu.Item as={NavLink} to="/region/Ulaula">
-          Ulaula
-        </Menu.Item>
+        {/* <Menu.Item as={NavLink} to="/region/Galar">
+          Galar
+        </Menu.Item> */}
       </Menu>
     </nav>
   );
