@@ -334,8 +334,6 @@ header {
 .container-pokedex .left-screen-bottom .arrow-pad .arrow-down,
 .container-pokedex .left-screen-bottom .arrow-pad .arrow-left {
   background: #333333;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
 }
 
 .arrow-up {
