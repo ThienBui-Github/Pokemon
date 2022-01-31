@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { debounce } from "lodash";
 import { useParams, useNavigate } from "react-router";
@@ -13,9 +13,6 @@ const Region = () => {
 
   const [region, setRegion] = useState(updatedRegion);
   const [regionData, setRegionData] = useState([]);
-  const [regionPokemon, setRegionPokemon] = useState([]);
-  const [pokemon, setPokemon] = useState("");
-  const [pokemonData, setPokemonData] = useState([]);
 
   //Assigns ID for request
   const changeRegionName = async (update) => {
